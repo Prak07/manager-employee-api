@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     path('manager_getall', get_managers, name='get_managers'),
     path('manager_get/<str:id>', get_manager_by_id, name='get_manager_by_id'),
+    path('manager_get_employee/<str:id>', get_manager_by_id, name='get_manager_by_id'),
     path('manager_create', create_manager, name='create_manager'),
     path('manager_update', update_manager, name='update_manager'),
     path('manager_delete/<str:id>', Delete_manager, name='delete_manager'),

@@ -22,9 +22,25 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Rest Api",
+        title="Manager_Employee_api",
         default_version='v1',
-        description="manager_employee_api",
+        description="""The Employee Management API enables organizations to efficiently manage employees and their respective managers.
+        
+    This API provides functionality to create, retrieve, update, and delete employee records, allowing employees to select their managers
+    to employees and perform various operations on employee data.
+    
+    There are two models manager and eployee connected with many to one field using manager as the foriegnkey in the employee table.
+    
+    Key Features:
+    - Add new employees or managers with relevant details.
+    - Assign managers to employees or update their managers.
+    - Retrieve a list of all employees or managers, or filter by specific criteria.
+    - Update or remove employee or manager records from the system.
+    - If a manager is deleted that is assigned to employees then the manager column of employee is set to null so that a new manager can be assigned.
+    
+    No authentication is required for this API.
+    
+    """,
         terms_of_service="https://www.example.com/terms/",
         contact=openapi.Contact(email="contact@example.com"),
         license=openapi.License(name="Awesome License"),

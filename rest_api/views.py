@@ -7,7 +7,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 import uuid
+from drf_yasg.utils import swagger_auto_schema
 
+@swagger_auto_schema(method='get',operation_description="Retrieve list of all employees")
 @api_view(['GET'])
 def get_managers(request):
     if request.method=='GET':
@@ -18,7 +20,7 @@ def get_managers(request):
         except:
             return Response({'error': 'Managers not found'},status=status.HTTP_404_NOT_FOUND)
             
-    
+@swagger_auto_schema(method='get', operation_description="Retrieve a specific manager's details by their unique ID")    
 @api_view(['GET'])
 def get_manager_by_id(request,id):
     if request.method=='GET':
@@ -29,7 +31,15 @@ def get_manager_by_id(request,id):
         except:
             return Response({'error': 'Manager not found'},status=status.HTTP_404_NOT_FOUND)
          
-         
+@swagger_auto_schema(method='post', operation_description='''Create a new manager in the organization.Example parameters 
+                        
+    {
+        "name": "Amit Sharma",
+        "age": 40,
+        "email": "amit.sharma@example.com",
+        "date_joined": "2022-01-15",
+        "department": "Sales"
+    }''',request_body=ManagerCreateSerializer)         
 @api_view(['POST'])
 def create_manager(request):
     try:
@@ -45,7 +55,12 @@ def create_manager(request):
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
             
-
+@swagger_auto_schema(method='patch', operation_description='''Update an existing manager's information by ID.Used Patch request to update part of an existing resource. It allows sending only the fields that need to be updated, without affecting the others.Example Parametes:
+                     
+    {
+        "id":1,
+        "age":20
+    }''',request_body=ManagerUpdateSerializer)
 @api_view(['PATCH'])   
 def update_manager(request): 
     try:
@@ -64,6 +79,7 @@ def update_manager(request):
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST) 
 
+@swagger_auto_schema(method='delete', operation_description="Delete a manager by their unique ID.")
 @api_view(['DELETE'])
 def Delete_manager(request,id):
     if request.method=="DELETE":
@@ -74,6 +90,7 @@ def Delete_manager(request,id):
         except:
             return Response({'error': 'Manager not found'},status=status.HTTP_404_NOT_FOUND)
 
+@swagger_auto_schema(method='get', operation_description="Retrieve list of all employees in the organization.")
 @api_view(['GET'])
 def get_employees(request):
     if request.method=='GET':
@@ -83,7 +100,8 @@ def get_employees(request):
             return Response(serialize.data)
         except:
             return Response({'error': 'employees not found'},status=status.HTTP_404_NOT_FOUND)
-    
+
+@swagger_auto_schema(method='get', operation_description="Retrieve a specific employee's details by their unique ID.")    
 @api_view(['GET'])
 def get_employee_by_id(request,id):
     if request.method=='GET':
@@ -94,7 +112,16 @@ def get_employee_by_id(request,id):
         except:
             return Response({'error': 'Employee not found'},status=status.HTTP_404_NOT_FOUND)
          
-         
+@swagger_auto_schema(method='post', operation_description='''Create a new employee in the organization.If the manager given is not present in the organization then it will raise a 400 Bad request Error.Example Parameters     
+    
+    {
+        "name": "Aakash Desai",
+        "age": 28,
+        "email": "aakash.desai@example.com",
+        "date_joined": "2023-01-10",
+        "designation": "Software Engineer",
+        "manager": 2
+    }''',request_body=EmployeeCreateSerializer)
 @api_view(['POST'])
 def create_employee(request):
     try:
@@ -108,7 +135,13 @@ def create_employee(request):
                 return Response(serialize.errors,status=status.HTTP_400_BAD_REQUEST)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    
+
+@swagger_auto_schema(method='patch', operation_description='''Update an existing employee's information by ID.Used Patch request to update part of an existing resource. It allows sending only the fields that need to be updated, without affecting the others.Example Parametes:
+                     
+    {
+        "id":10,
+        "age":20
+    }''',request_body=EmployeeUpdateSerializer)    
 @api_view(['PATCH'])
 def update_employee(request):
     try:
@@ -126,6 +159,7 @@ def update_employee(request):
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+@swagger_auto_schema(method='delete', operation_description="Delete an employee by their unique ID")
 @api_view(['DELETE'])
 def Delete_employee(request,id):
     try:
@@ -135,6 +169,7 @@ def Delete_employee(request,id):
     except:
         return Response({'error': 'Employee not found'},status=status.HTTP_404_NOT_FOUND)
 
+@swagger_auto_schema(method='get', operation_description="Retrieve a list of employees assigned to a specific manager by manager ID.This Api can be used to get list of all employees under one manager")
 @api_view(['GET'])
 def get_employees_by_manager(request,id):
     if request.method=='GET':

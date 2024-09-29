@@ -169,7 +169,9 @@ def Delete_employee(request,id):
     except:
         return Response({'error': 'Employee not found'},status=status.HTTP_404_NOT_FOUND)
 
-@swagger_auto_schema(method='get', operation_description="Retrieve a list of employees assigned to a specific manager by manager ID.This Api can be used to get list of all employees under one manager")
+@swagger_auto_schema(method='get', operation_description='''Retrieve a list of employees assigned to a specific manager by manager ID.This Api can be used to get list of all employees under one manager.
+                     
+If the manager is not present in the organization it will raise 404 Not Found Error.''')
 @api_view(['GET'])
 def get_employees_by_manager(request,id):
     if request.method=='GET':

@@ -22,7 +22,7 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Manager_Employee_api",
+        title="Manager_Employee_API",
         default_version='v1',
         description="""The Employee Management API enables organizations to efficiently manage employees and their respective managers.
         

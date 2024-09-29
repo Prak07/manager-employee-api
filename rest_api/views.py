@@ -174,9 +174,13 @@ def Delete_employee(request,id):
 def get_employees_by_manager(request,id):
     if request.method=='GET':
         try:
-            employee = Employee.objects.filter(manager=id)
-            serializer = EmployeeGetSerializer(employee,many=True)
-            return Response(serializer.data)
+            manager = Manager.objects.get(id=id)
+            try:
+                employee = Employee.objects.filter(manager=id)
+                serializer = EmployeeGetSerializer(employee,many=True)
+                return Response(serializer.data)
+            except:
+                return Response({'error': 'Employee not found'},status=status.HTTP_404_NOT_FOUND)
         except:
-            return Response({'error': 'Employee not found'},status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Manager not found'},status=status.HTTP_404_NOT_FOUND)
          

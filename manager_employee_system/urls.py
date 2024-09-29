@@ -33,6 +33,7 @@ schema_view = get_schema_view(
     
     Key Features:
     - Add new employees or managers with relevant details.
+    - ID is assigned to each individual by django framework automatically which is unique.
     - Assign managers to employees or update their managers.
     - Retrieve a list of all employees or managers, or filter by specific criteria.
     - Update or remove employee or manager records from the system.

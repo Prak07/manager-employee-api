@@ -41,10 +41,7 @@ schema_view = get_schema_view(
     
     No authentication is required for this API.
     
-    """,
-        terms_of_service="https://www.example.com/terms/",
-        contact=openapi.Contact(email="contact@example.com"),
-        license=openapi.License(name="Awesome License"),
+    """
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),

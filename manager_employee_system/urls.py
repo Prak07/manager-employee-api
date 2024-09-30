@@ -29,7 +29,7 @@ schema_view = get_schema_view(
     This API provides functionality to create, retrieve, update, and delete employee records, allowing employees to select their managers
     to employees and perform various operations on employee data.
     
-    There are two models manager and eployee connected with many to one field using manager as the foriegnkey in the employee table.
+    There are two models manager and eployee connected with many to one field using manager id as the foriegnkey in the employee table.
     
     Key Features:
     - Add new employees or managers with relevant details.

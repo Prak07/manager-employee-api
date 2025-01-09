@@ -42,7 +42,7 @@ Before running the project, ensure the following are installed:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/manager-employee-api.git
+   git clone https://github.com/Prak07/manager-employee-api.git
    ```
 
 2. **Navigate to the Project Directory**:
